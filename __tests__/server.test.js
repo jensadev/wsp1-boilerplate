@@ -1,5 +1,5 @@
 import request from "supertest"
-import app from "./server"
+import app from "../server"
 
 describe("Server", () => {
     it("should respond to GET / with 200", async () => {
