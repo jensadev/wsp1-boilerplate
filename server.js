@@ -25,12 +25,11 @@ app.use(express.static("public"))
 app.use("/", indexRouter)
 
 app.use((req, res, next) => {
-    res.status(404).send('Sidan hittades inte!')
+    res.status(404).send("Sidan kunde inte hittas.")
 })
 
 app.use((err, req, res, next) => {
-    console.error(err.stack)
-    res.status(500).send('Något gick fel!')
+    res.status(500).send("Serverfel.")
 })
 
 export default app
