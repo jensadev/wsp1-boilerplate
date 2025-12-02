@@ -7,6 +7,7 @@ import indexRouter from './routes/index.js'
 
 const app = express()
 const port = 3000 || process.env.PORT
+const isProduction = process.env.NODE_ENV === 'production'
 
 nunjucks.configure("views", {
   autoescape: true,
@@ -29,8 +30,9 @@ app.use((req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-    res.status(500).send("Serverfel.")
+    console.error(err.stack)
+    const message = isProduction ? "Serverfel." : `Serverfel: ${err.message}`
+    res.status(500).send(message)
 })
 
-export default app
-export { port }
+export { app, port }
